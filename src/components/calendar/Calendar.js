@@ -18,6 +18,7 @@ const MyCalendar = ({ readReminders, reminderState , createReminder}) => {
         const DayToFn = (day) => {
             return (
                 <Day
+                    loading={reminderState.loading}
                     reminders={reminderState.reminders}
                     currentDay={day}>
                 </Day>

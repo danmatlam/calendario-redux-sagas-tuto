@@ -4,6 +4,8 @@ import { Badge } from 'antd';
 import { connect } from 'react-redux';
 import { READ_REMINDERS } from '../../redux/ActionTypes';
 import moment from 'moment';
+import { Spin, Icon } from 'antd';
+const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 
 
@@ -23,18 +25,22 @@ const remindersOnDay = (reminders, currentDay) => {
     return remindersOnDay;
 }
 
-const Day = ({reminders,currentDay}) => {
+const Day = ({ reminders, currentDay, loading }) => {
 
     const RemindersOnDay = remindersOnDay(reminders, currentDay);
 
     return (
-        <ul className="events">
+        !loading ? <ul className="events">
             {RemindersOnDay.map(item => (
+
                 <li key={item.reminder}>
                     <Badge color={item.color} text={item.reminder} />
                 </li>
             ))}
-        </ul>
+        </ul> 
+        : <Spin indicator={antIcon} />
+
+
     );
 }
 export default Day
